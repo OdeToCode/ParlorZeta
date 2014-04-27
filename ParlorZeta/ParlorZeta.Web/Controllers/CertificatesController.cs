@@ -8,33 +8,29 @@ namespace ParlorZeta.Web.Controllers
 {
     public class CertificatesController : Controller
     {
-        private readonly IFileSystem _fileSystem;
         private readonly PublishSettingsStore _store;
-        private readonly PublishSettingsCache _cache;
 
         public CertificatesController(PublishSettingsStore store, PublishSettingsCache cache)
         {
             _store = store;
-            _cache = cache;
         }
 
         public ActionResult Index()
         {
-            var model = _cache.GetSettings();
+            var model = _store.GetAllSettings();
             return View(model);
         }
 
         public ActionResult Upload(HttpPostedFileBase certificateFile)
         {
             _store.SaveSettings(certificateFile.FileName, certificateFile.InputStream);
-            _cache.Refresh();
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public ActionResult Delete(string id)
         {
-            var setting = _cache.GetSettings().FirstOrDefault(s => s.Id == id);
+            var setting = _store.GetSettingById(id);
             if (setting != null)
             {
                 var impactedSettings = _cache.GetSettings().Where(s => s.Filename == setting.Filename);

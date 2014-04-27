@@ -9,9 +9,10 @@ namespace ParlorZeta.Azure.Certificates
 {
     public class PublishSettingsStore
     {
-        public PublishSettingsStore(IFileSystem fileSystem)
+        public PublishSettingsStore(IFileSystem fileSystem, PublishSettingsCache cache)
         {
             _fileSystem = fileSystem;
+            _cache = cache;
         }
 
         public void SaveSettings(string fileName, Stream inputFileStream)
@@ -25,6 +26,7 @@ namespace ParlorZeta.Azure.Certificates
                     {
                         document.Save(writer);
                     }
+                    _cache.Empty();
                 }
                 else
                 {
@@ -40,6 +42,28 @@ namespace ParlorZeta.Azure.Certificates
         public void DeleteSubscriptions(string fileName)
         {
             _fileSystem.Delete(fileName);
+            _cache.Empty();
+        }
+
+        public IEnumerable<PublishSettings> GetAllSettings()
+        {
+            var settings = _cache.GetFromCache();
+            if (settings == null)
+            {
+                settings = new List<PublishSettings>();
+                var files = _fileSystem.GetFileNames(BaseDirectory);
+                foreach (var file in files)
+                {
+                    var document = XDocument.Load(file);
+                    var subscriptions = document.Descendants("Subscription");
+                    foreach (var subscription in subscriptions)
+                    {
+                        settings.Add(new PublishSettings(subscription, file));
+                    }
+                }
+                _cache.SetToCache(settings);
+            }
+            return settings;
         }
 
         public string BaseDirectory
@@ -50,21 +74,13 @@ namespace ParlorZeta.Azure.Certificates
             }
         }
 
-        public IEnumerable<PublishSettings> GetAllSettings()
+        public object GetSettingById(string id)
         {
-            var files = _fileSystem.GetFileNames(BaseDirectory);
-            foreach (var file in files)
-            {
-                var document = XDocument.Load(file);
-                var subscriptions = document.Descendants("Subscription");
-                foreach (var subscription in subscriptions)
-                {
-                    var settings = new PublishSettings(subscription, file);
-                    yield return settings;
-                }
-            }
+            throw new NotImplementedException();
         }
 
         private readonly IFileSystem _fileSystem;
+
+        private readonly PublishSettingsCache _cache;
     }
 }
