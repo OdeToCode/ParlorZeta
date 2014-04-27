@@ -1,17 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Web;
-using System.Xml.Linq;
-using ParlorZeta.Azure.FileSystem;
 
 namespace ParlorZeta.Azure.Certificates
 {
     public class PublishSettingsCache
     {
-        private readonly IFileSystem _fileSystem;
+        private readonly PublishSettingsStore _store;
 
-        public PublishSettingsCache(IFileSystem fileSystem)
+        public PublishSettingsCache(PublishSettingsStore store)
         {
-            _fileSystem = fileSystem;
+            _store = store;
         }
 
         public void Refresh()
@@ -24,17 +22,8 @@ namespace ParlorZeta.Azure.Certificates
             if (GetFromCache() == null || hardRefresh)
             {
                 var list = new List<PublishSettings>();
-                var files = _fileSystem.GetFileNames("AppData/PublishSettings");
-                foreach (var file in files)
-                {
-                    var document = XDocument.Load(file);
-                    var subscriptions = document.Descendants("Subscription");
-                    foreach (var subscription in subscriptions)
-                    {
-                        var settings = new PublishSettings(subscription);
-                        list.Add(settings);
-                    }
-                }
+                var settings = _store.GetAllSettings();
+                list.AddRange(settings);
                 SetToCache(list);
             }
             return GetFromCache();
@@ -42,14 +31,14 @@ namespace ParlorZeta.Azure.Certificates
 
         public IList<PublishSettings> GetFromCache()
         {
-            return HttpRuntime.Cache[Key] as IList<PublishSettings>;
+            return HttpRuntime.Cache[CacheKey] as IList<PublishSettings>;
         }
 
         public void SetToCache(IList<PublishSettings> settings)
         {
-            HttpRuntime.Cache[Key] = settings;
+            HttpRuntime.Cache[CacheKey] = settings;
         }
 
-        private const string Key = "_publishSettings";
+        private const string CacheKey = "_publishSettings";
     }
 }

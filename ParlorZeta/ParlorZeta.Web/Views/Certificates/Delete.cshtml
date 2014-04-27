@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ParlorZeta.Azure.Certificates.PublishSettings>
+
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.Any())
+        {
+
+            <h2>Are you sure?</h2>
+            <div>This will delete the following subscriptions:</div>
+            <ul>
+                @foreach (var setting in Model)
+                {
+                    <li>@setting.Name : (@setting.Id)</li>
+                }
+            </ul>
+            <form method="POST">
+                <input type="hidden" name="fileName" value="@Model.First().Filename" />
+                <input type="submit" value="Yes" class="btn btn-danger"/>
+                <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>
+            </form>
+        }
+        else{
+            <div>Could not find setting!</div>    
+        }
+    </div>
+</div>
+

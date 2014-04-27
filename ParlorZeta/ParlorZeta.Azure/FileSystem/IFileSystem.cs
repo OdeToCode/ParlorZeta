@@ -7,5 +7,6 @@ namespace ParlorZeta.Azure.FileSystem
     {        
         Stream OpenWritableFileStream(string relativePath, string fileName);
         IEnumerable<string> GetFileNames(string relativePath);
+        void Delete(string fileName);
     }
 }

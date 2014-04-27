@@ -29,5 +29,10 @@ namespace ParlorZeta.Web.Infrastructure
             }
             return Directory.GetFiles(destination);
         }
+
+        public void Delete(string fileName)
+        {
+            File.Delete(fileName);
+        }
     }
 }

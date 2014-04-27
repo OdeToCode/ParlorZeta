@@ -11,6 +11,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Id</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,6 +20,13 @@
                         <tr>
                             <td>@setting.Id</td>
                             <td>@setting.Name</td>
+                            <td>
+                                <span >
+                                    <a class="btn btn-danger" href="@Url.Action("Delete", new { id = setting.Id })">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                </span>
+                            </td>
                         </tr>
                     }
                 </tbody>
