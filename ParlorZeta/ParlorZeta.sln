@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1AA998
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParlorZeta.Azure", "ParlorZeta.Azure\ParlorZeta.Azure.csproj", "{68A7A8A7-4310-4E81-B950-BECAD8D5F382}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParlorZeta.Tests", "ParlorZeta.Tests\ParlorZeta.Tests.csproj", "{5AB27928-BD91-48B4-9DE6-221F00C38818}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +26,14 @@ Global
 		{7D9D5AE2-D3CA-4A30-A237-C77C30F18C22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D9D5AE2-D3CA-4A30-A237-C77C30F18C22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D9D5AE2-D3CA-4A30-A237-C77C30F18C22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A7A8A7-4310-4E81-B950-BECAD8D5F382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A7A8A7-4310-4E81-B950-BECAD8D5F382}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A7A8A7-4310-4E81-B950-BECAD8D5F382}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A7A8A7-4310-4E81-B950-BECAD8D5F382}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB27928-BD91-48B4-9DE6-221F00C38818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB27928-BD91-48B4-9DE6-221F00C38818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB27928-BD91-48B4-9DE6-221F00C38818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB27928-BD91-48B4-9DE6-221F00C38818}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
