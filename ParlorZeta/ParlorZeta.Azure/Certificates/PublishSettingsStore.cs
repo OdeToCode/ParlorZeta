@@ -74,9 +74,19 @@ namespace ParlorZeta.Azure.Certificates
             }
         }
 
-        public object GetSettingById(string id)
+        public PublishSettings GetSettingById(string id)
         {
-            throw new NotImplementedException();
+            var setting = GetAllSettings().FirstOrDefault(s => s.Id == id);
+            if (setting == null)
+            {
+                throw new ArgumentException("Could not find settings for " + id);
+            }
+            return setting;
+        }
+
+        public object GetSettingByFile(string filename)
+        {
+            return GetAllSettings().Where(s => s.Filename == filename);
         }
 
         private readonly IFileSystem _fileSystem;

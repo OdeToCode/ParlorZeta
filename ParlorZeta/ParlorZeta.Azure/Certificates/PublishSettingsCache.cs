@@ -17,7 +17,10 @@ namespace ParlorZeta.Azure.Certificates
 
         public void Empty()
         {
-            HttpRuntime.Cache[CacheKey] = null;
+            if (HttpRuntime.Cache[CacheKey] != null)
+            {
+                HttpRuntime.Cache.Remove(CacheKey);
+            }
         }
 
         private const string CacheKey = "_publishSettings";

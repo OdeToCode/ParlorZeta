@@ -33,7 +33,7 @@ namespace ParlorZeta.Web.Controllers
             var setting = _store.GetSettingById(id);
             if (setting != null)
             {
-                var impactedSettings = _cache.GetSettings().Where(s => s.Filename == setting.Filename);
+                var impactedSettings = _store.GetSettingByFile(setting.Filename);
                 return View(impactedSettings);
             }
             return View();
@@ -43,7 +43,6 @@ namespace ParlorZeta.Web.Controllers
         public ActionResult Delete(string fileName, FormCollection collection)
         {
             _store.DeleteSubscriptions(fileName);
-            _cache.Refresh();
             return RedirectToAction("Index");
         }
     }
