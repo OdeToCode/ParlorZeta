@@ -86,7 +86,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Certificates\CertificateStore.cs" />
+    <Compile Include="Certificates\PublishSettings.cs" />
+    <Compile Include="Certificates\PublishSettingsStore.cs" />
+    <Compile Include="FileSystem\IFileSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VirtualMachines\VirtualMachineClient.cs" />
   </ItemGroup>

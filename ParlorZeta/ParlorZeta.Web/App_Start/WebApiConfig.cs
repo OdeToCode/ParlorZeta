@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using ParlorZeta.Web.App_Start;
+using ParlorZeta.Web.Infrastructure;
 
 namespace ParlorZeta.Web
 {
@@ -9,9 +8,8 @@ namespace ParlorZeta.Web
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-
-            // Web API routes
+            config.DependencyResolver = new StructureMapDependencyResolver(IoC.Container());
+            
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
