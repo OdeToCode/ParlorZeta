@@ -101,6 +101,7 @@
     <Content Include="Client\Common\zetaCommon.js" />
     <Content Include="Client\VirtualMachines\virtualMachines.js" />
     <Content Include="Global.asax" />
+    <Content Include="Content\styles.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -120,6 +121,7 @@
     <Compile Include="Api\VmController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CertificatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VirtualMachinesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -132,6 +134,7 @@
     <Content Include="packages.config" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap-theme.css.map" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Views\Certificates\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,21 @@
+﻿<h2>Certificate Management</h2>
+
+<div class="row">
+    table of certs    
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h3>Upload Certificate</h3>
+        <form name="certificateUpload" method="post" action="@Url.Action("Upload")">
+            <fieldset>
+                <div class="form-group">
+                    <label>Certificate</label>                   
+                    <input type="file" name="certificateFile">                    
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Upload"/>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

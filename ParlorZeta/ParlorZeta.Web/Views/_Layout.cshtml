@@ -3,6 +3,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>ParlorZeta</title>
     <link href="~/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/styles.css" rel="stylesheet" />
 </head>
 <body>
     
@@ -13,7 +14,7 @@
                 @Html.ActionLink("VMs", "Index", "VirtualMachines")
             </li>
             <li>
-                <a>Tasks</a>
+                @Html.ActionLink("Certs", "Index", "Certificates" )
             </li>
         </ul>
     </nav>
