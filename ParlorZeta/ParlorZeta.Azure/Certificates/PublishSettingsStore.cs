@@ -14,26 +14,25 @@ namespace ParlorZeta.Azure.Certificates
         }
 
         public void SaveSettings(string fileName, Stream inputFileStream)
-        {
-            //try
-            //{
-            //    var settings = new PublishSettings(inputFileStream);
-            //}
-
+        {           
             try
             {
                 var document = XDocument.Load(inputFileStream);
-                if (document.Descendants("Subscriptions").Any())
+                if (document.Descendants("Subscription").Any())
                 {
-                    //using (var writer = _fileSystem.OpenForWrite("AppData/PublishSettings", fileName))
-                    //{
-                    //    document.Save(writer);
-                    //}
+                    using (var writer = _fileSystem.OpenWritableFileStream("AppData/PublishSettings", fileName))
+                    {
+                        document.Save(writer);
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("The file does not contain Subscription elements");
                 }
             }
             catch (Exception ex)
             {
-                throw new ArgumentException("Could not load publish settings, is it correct file?", ex);
+                throw new ArgumentException("Could not load publish settings, see inner exception for details", ex);
             }           
         }
 

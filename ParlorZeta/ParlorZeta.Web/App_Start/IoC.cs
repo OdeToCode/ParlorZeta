@@ -1,4 +1,9 @@
-﻿using StructureMap;
+﻿using System.Web;
+using System.Web.Mvc;
+using ParlorZeta.Azure.FileSystem;
+using ParlorZeta.Web.Controllers;
+using ParlorZeta.Web.Infrastructure;
+using StructureMap;
 using StructureMap.Graph;
 
 namespace ParlorZeta.Web.App_Start
@@ -11,13 +16,13 @@ namespace ParlorZeta.Web.App_Start
             {
                 ObjectFactory.Initialize(init =>
                 {
-                    //init.Scan(scan =>
-                    //{
-                    //    scan.TheCallingAssembly();
-                    //    scan.WithDefaultConventions();
-                    //});                    
-                });
+                    init.Scan(scan =>
+                    {
+                    });
 
+                    init.For<IFileSystem>().Use<AspNetFileSystem>(() => new AspNetFileSystem(HttpContext.Current));
+                });
+                
                 _container = ObjectFactory.Container;
 
             }

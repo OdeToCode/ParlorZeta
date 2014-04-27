@@ -23,7 +23,15 @@ namespace ParlorZeta.Web.Infrastructure
 
         public object GetService(Type serviceType)
         {
-            var result = _container.TryGetInstance(serviceType);
+            object result;
+            if (serviceType.IsAbstract || serviceType.IsInterface)
+            {
+                result = _container.TryGetInstance(serviceType);
+            }
+            else
+            {
+                result = _container.GetInstance(serviceType);
+            }
             return result;
         }
 

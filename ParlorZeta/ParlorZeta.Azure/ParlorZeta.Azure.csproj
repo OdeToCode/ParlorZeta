@@ -79,6 +79,7 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\net45\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Certificates\PublishSettings.cs" />
+    <Compile Include="Certificates\PublishSettingsCache.cs" />
     <Compile Include="Certificates\PublishSettingsStore.cs" />
     <Compile Include="FileSystem\IFileSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

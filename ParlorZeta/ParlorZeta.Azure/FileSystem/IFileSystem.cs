@@ -1,9 +1,11 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace ParlorZeta.Azure.FileSystem
 {
     public interface IFileSystem
-    {
-        void SaveFile(Stream fileStream, string appdataPublishsettings, string fileName);
+    {        
+        Stream OpenWritableFileStream(string relativePath, string fileName);
+        IEnumerable<string> GetFileNames(string relativePath);
     }
 }
