@@ -1,39 +1,53 @@
-﻿using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using ParlorZeta.Azure.Certificates;
-using ParlorZeta.Azure.FileSystem;
+using ParlorZeta.Web.Infrastructure;
+using ParlorZeta.Web.Models.Certificates;
 
 namespace ParlorZeta.Web.Controllers
 {
     public class CertificatesController : Controller
     {
-        private readonly PublishSettingsStore _store;
+        private readonly PublishSettingsStore _settingsStore;
+        private readonly CookieStore _cookieStore;
 
-        public CertificatesController(PublishSettingsStore store, PublishSettingsCache cache)
+        public CertificatesController(PublishSettingsStore settingsStore, CookieStore cookieStore)
         {
-            _store = store;
+            _settingsStore = settingsStore;
+            _cookieStore = cookieStore;
         }
 
         public ActionResult Index()
         {
-            var model = _store.GetAllSettings();
+            var settings = _settingsStore.GetAllSettings();
+            var model = new CertificateList
+            {
+                PublishSettingses = settings,
+                SelectedId = _cookieStore.GetSelectedSubscriptionId()
+            };
             return View(model);
         }
 
         public ActionResult Upload(HttpPostedFileBase certificateFile)
         {
-            _store.SaveSettings(certificateFile.FileName, certificateFile.InputStream);
+            _settingsStore.SaveSettings(certificateFile.FileName, certificateFile.InputStream);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Select(string selectedCertificateId)
+        {
+            _cookieStore.SetSelectedSubscriptionId(selectedCertificateId);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public ActionResult Delete(string id)
         {
-            var setting = _store.GetSettingById(id);
+            var setting = _settingsStore.GetSettingById(id);
             if (setting != null)
             {
-                var impactedSettings = _store.GetSettingByFile(setting.Filename);
+                var impactedSettings = _settingsStore.GetSettingByFile(setting.Filename);
                 return View(impactedSettings);
             }
             return View();
@@ -42,7 +56,7 @@ namespace ParlorZeta.Web.Controllers
         [HttpPost]
         public ActionResult Delete(string fileName, FormCollection collection)
         {
-            _store.DeleteSubscriptions(fileName);
+            _settingsStore.DeleteSubscriptions(fileName);
             return RedirectToAction("Index");
         }
     }

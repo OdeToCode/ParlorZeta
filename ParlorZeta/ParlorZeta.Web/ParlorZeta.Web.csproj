@@ -129,13 +129,17 @@
     <Compile Include="App_Start\MvcConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CertificatesController.cs" />
+    <Compile Include="Controllers\CertificateSelectionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VirtualMachinesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AspNetFileSystem.cs" />
+    <Compile Include="Infrastructure\CookieStore.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
+    <Compile Include="Models\CertificateSelection\CertificateSelections.cs" />
+    <Compile Include="Models\Certificates\CertificateList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +149,7 @@
     <Content Include="bower_components\bootstrap\dist\css\bootstrap.css.map" />
     <Content Include="Views\Certificates\Index.cshtml" />
     <Content Include="Views\Certificates\Delete.cshtml" />
+    <Content Include="Views\CertificateSelection\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -154,7 +159,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ParlorZeta.Azure\ParlorZeta.Azure.csproj">

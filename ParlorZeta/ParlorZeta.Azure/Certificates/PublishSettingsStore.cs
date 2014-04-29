@@ -45,7 +45,7 @@ namespace ParlorZeta.Azure.Certificates
             _cache.Empty();
         }
 
-        public IEnumerable<PublishSettings> GetAllSettings()
+        public IList<PublishSettings> GetAllSettings()
         {
             var settings = _cache.GetFromCache();
             if (settings == null)

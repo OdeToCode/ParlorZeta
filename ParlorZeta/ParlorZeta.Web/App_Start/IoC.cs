@@ -1,10 +1,7 @@
 ﻿using System.Web;
-using System.Web.Mvc;
 using ParlorZeta.Azure.FileSystem;
-using ParlorZeta.Web.Controllers;
 using ParlorZeta.Web.Infrastructure;
 using StructureMap;
-using StructureMap.Graph;
 
 namespace ParlorZeta.Web.App_Start
 {
@@ -15,12 +12,9 @@ namespace ParlorZeta.Web.App_Start
             if (_container == null)
             {
                 ObjectFactory.Initialize(init =>
-                {
-                    init.Scan(scan =>
-                    {
-                    });
-
+                {                   
                     init.For<IFileSystem>().Use<AspNetFileSystem>(() => new AspNetFileSystem(HttpContext.Current));
+                    init.For<CookieStore>().Use<CookieStore>(() => new CookieStore(HttpContext.Current));
                 });
                 
                 _container = ObjectFactory.Container;

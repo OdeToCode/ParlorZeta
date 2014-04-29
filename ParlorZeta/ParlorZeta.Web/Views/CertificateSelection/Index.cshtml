@@ -1,0 +1,10 @@
+﻿@model ParlorZeta.Web.Models.CertificateSelection.CertificateSelections
+
+<form class="nav navbar-nav navbar-right" method="POST">
+    <div class="form-group">
+        <label class="text-info">Subscription</label>        
+        @Html.DropDownListFor(m => m.SelectedCertificateId, Model.Options, new { @class = "form-control" })
+    </div>
+    
+</form>
+<span></span>
