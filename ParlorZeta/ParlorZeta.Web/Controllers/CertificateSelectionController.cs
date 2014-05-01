@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using ParlorZeta.Azure.Certificates;
 using ParlorZeta.Web.Infrastructure;
-using ParlorZeta.Web.Models.CertificateSelection;
 
 namespace ParlorZeta.Web.Controllers
 {
@@ -19,7 +18,7 @@ namespace ParlorZeta.Web.Controllers
         public PartialViewResult Index()
         {
             var selected = _cookies.GetSelectedSubscriptionId();
-            var model = new CertificateSelections(_store.GetAllSettings(), selected);
+            var model = _store.GetSettingById(selected);
             return PartialView(model);
         }        
     }

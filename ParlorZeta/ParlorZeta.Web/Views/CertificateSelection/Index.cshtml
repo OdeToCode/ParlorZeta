@@ -1,10 +1,15 @@
-﻿@model ParlorZeta.Web.Models.CertificateSelection.CertificateSelections
+﻿@model ParlorZeta.Azure.Certificates.PublishSettings
 
-<form class="nav navbar-nav navbar-right" method="POST">
-    <div class="form-group">
-        <label class="text-info">Subscription</label>        
-        @Html.DropDownListFor(m => m.SelectedCertificateId, Model.Options, new { @class = "form-control" })
-    </div>
-    
-</form>
-<span></span>
+<div class="nav navbar-nav navbar-right">
+    @if (Model == null)
+    {
+        <div class="text-danger">No subscription active</div>
+        <a href="@Url.Action("Index", "Certificates")" class="btn btn-danger btn-xs pull-right">Change</a>
+    }
+    else
+    {
+        <div class="text-info">Sub: @Model.Name</div>        
+        <a href="@Url.Action("Index", "Certificates")" class="btn btn-info btn-xs pull-right">Change</a>
+    }    
+</div>
+<div></div>

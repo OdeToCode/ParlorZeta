@@ -77,10 +77,6 @@ namespace ParlorZeta.Azure.Certificates
         public PublishSettings GetSettingById(string id)
         {
             var setting = GetAllSettings().FirstOrDefault(s => s.Id == id);
-            if (setting == null)
-            {
-                throw new ArgumentException("Could not find settings for " + id);
-            }
             return setting;
         }
 
