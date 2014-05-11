@@ -1,21 +1,21 @@
-﻿using System.Web.Http;
-using ParlorZeta.Azure.Certificates;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
+using ParlorZeta.Azure.VirtualMachines;
 
 namespace ParlorZeta.Web.Api
 {
     public class VmController : ApiController
     {
-        public VmController()
+        private readonly VirtualMachineClient _client;
+
+        public VmController(VirtualMachineClient client)
         {
-            
-            
+            _client = client;
         }
 
-        public IHttpActionResult Get()
-        {
-            
-
-            return Ok();
+        public async Task<IHttpActionResult> Get()
+        {            
+            return Ok(await _client.GetMachines());
         }
     }
 }

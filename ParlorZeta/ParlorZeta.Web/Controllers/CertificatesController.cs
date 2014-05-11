@@ -1,7 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using ParlorZeta.Azure.Certificates;
-using ParlorZeta.Web.Infrastructure;
 using ParlorZeta.Web.Models.Certificates;
 
 namespace ParlorZeta.Web.Controllers
@@ -17,13 +16,7 @@ namespace ParlorZeta.Web.Controllers
 
         public ActionResult Index()
         {
-            var settings = _settingsStore.GetAllSettings();
-            var selected = _settingsStore.GetUserSelectedSettings();
-            var model = new CertificateList
-            {
-                PublishSettingses = settings,
-                SelectedId = selected.Id
-            };
+            var model = CertificateList.FromStore(_settingsStore);            
             return View(model);
         }
 

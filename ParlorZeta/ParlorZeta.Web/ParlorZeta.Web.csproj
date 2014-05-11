@@ -98,6 +98,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Apps\VirtualMachines\app.js" />
+    <Content Include="Apps\Common\common.js" />
+    <Content Include="bower_components\angular-animate\angular-animate.js" />
     <Content Include="bower_components\angular-resource\angular-resource.js" />
     <Content Include="bower_components\angular\angular.js" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap-theme.css" />
@@ -157,6 +160,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Apps\Tests\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

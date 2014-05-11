@@ -9,7 +9,7 @@ namespace ParlorZeta.Web.Controllers
 
         public CertificateSelectionController(PublishSettingsStore store)
         {
-            _store = store;
+            _store = store;            
         }
 
         public PartialViewResult Index()
