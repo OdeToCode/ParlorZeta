@@ -1,5 +1,6 @@
-﻿using System.Web;
-using ParlorZeta.Azure.FileSystem;
+﻿using System.Net;
+using System.Web;
+using ParlorZeta.Azure.Contracts;
 using ParlorZeta.Web.Infrastructure;
 using StructureMap;
 
@@ -14,7 +15,7 @@ namespace ParlorZeta.Web.App_Start
                 ObjectFactory.Initialize(init =>
                 {                   
                     init.For<IFileSystem>().Use<AspNetFileSystem>(() => new AspNetFileSystem(HttpContext.Current));
-                    init.For<CookieStore>().Use<CookieStore>(() => new CookieStore(HttpContext.Current));
+                    init.For<IUserSettings>().Use<CookieStore>(() => new CookieStore(HttpContext.Current));
                 });
                 
                 _container = ObjectFactory.Container;

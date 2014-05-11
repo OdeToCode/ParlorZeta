@@ -90,9 +90,11 @@
     <Compile Include="Certificates\PublishSettings.cs" />
     <Compile Include="Certificates\PublishSettingsCache.cs" />
     <Compile Include="Certificates\PublishSettingsStore.cs" />
-    <Compile Include="FileSystem\IFileSystem.cs" />
+    <Compile Include="Contracts\IFileSystem.cs" />
+    <Compile Include="Contracts\IUserSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VirtualMachines\VirtualMachineClient.cs" />
+    <Compile Include="VirtualMachines\VirtualMachineModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

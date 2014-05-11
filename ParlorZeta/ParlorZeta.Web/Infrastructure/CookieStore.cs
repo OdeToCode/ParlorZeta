@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Web;
+using ParlorZeta.Azure.Contracts;
 
 namespace ParlorZeta.Web.Infrastructure
 {
-    public class CookieStore
+    public class CookieStore : IUserSettings
     {
         private readonly HttpContext _context;
 
@@ -24,9 +25,7 @@ namespace ParlorZeta.Web.Infrastructure
 
         private void Set(string key, string value)
         {
-            var cookie = new HttpCookie(key, value);
-            cookie.Expires = DateTime.Now.AddYears(2);
-            cookie.HttpOnly = true;
+            var cookie = new HttpCookie(key, value) {Expires = DateTime.Now.AddYears(2), HttpOnly = true};
             _context.Response.Cookies.Remove(key);
             _context.Response.Cookies.Set(cookie);
         }

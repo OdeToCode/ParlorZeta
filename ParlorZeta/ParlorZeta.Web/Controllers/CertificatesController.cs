@@ -9,21 +9,20 @@ namespace ParlorZeta.Web.Controllers
     public class CertificatesController : Controller
     {
         private readonly PublishSettingsStore _settingsStore;
-        private readonly CookieStore _cookieStore;
 
-        public CertificatesController(PublishSettingsStore settingsStore, CookieStore cookieStore)
+        public CertificatesController(PublishSettingsStore settingsStore)
         {
             _settingsStore = settingsStore;
-            _cookieStore = cookieStore;
         }
 
         public ActionResult Index()
         {
             var settings = _settingsStore.GetAllSettings();
+            var selected = _settingsStore.GetUserSelectedSettings();
             var model = new CertificateList
             {
                 PublishSettingses = settings,
-                SelectedId = _cookieStore.GetSelectedSubscriptionId()
+                SelectedId = selected.Id
             };
             return View(model);
         }
@@ -37,7 +36,7 @@ namespace ParlorZeta.Web.Controllers
         [HttpPost]
         public ActionResult Select(string selectedCertificateId)
         {
-            _cookieStore.SetSelectedSubscriptionId(selectedCertificateId);
+            _settingsStore.SetSelectedSettingsId(selectedCertificateId);
             return RedirectToAction("Index");
         }
 

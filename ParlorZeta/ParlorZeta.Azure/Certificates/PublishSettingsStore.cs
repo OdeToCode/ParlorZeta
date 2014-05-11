@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using ParlorZeta.Azure.FileSystem;
+using ParlorZeta.Azure.Contracts;
 
 namespace ParlorZeta.Azure.Certificates
 {
     public class PublishSettingsStore
     {
-        public PublishSettingsStore(IFileSystem fileSystem, PublishSettingsCache cache)
+        public PublishSettingsStore(IFileSystem fileSystem,  PublishSettingsCache cache, IUserSettings userSettings)
         {
             _fileSystem = fileSystem;
             _cache = cache;
+            _userSettings = userSettings;
         }
 
-        public void SaveSettings(string fileName, Stream inputFileStream)
+        public virtual void SaveSettings(string fileName, Stream inputFileStream)
         {           
             try
             {
@@ -39,13 +40,13 @@ namespace ParlorZeta.Azure.Certificates
             }           
         }
 
-        public void DeleteSubscriptions(string fileName)
+        public virtual void DeleteSubscriptions(string fileName)
         {
             _fileSystem.Delete(fileName);
             _cache.Empty();
         }
 
-        public IList<PublishSettings> GetAllSettings()
+        public virtual IList<PublishSettings> GetAllSettings()
         {
             var settings = _cache.GetFromCache();
             if (settings == null)
@@ -66,7 +67,7 @@ namespace ParlorZeta.Azure.Certificates
             return settings;
         }
 
-        public string BaseDirectory
+        public virtual string BaseDirectory
         {
             get
             {
@@ -74,19 +75,30 @@ namespace ParlorZeta.Azure.Certificates
             }
         }
 
-        public PublishSettings GetSettingById(string id)
+        public virtual PublishSettings GetUserSelectedSettings()
+        {
+            var id = _userSettings.GetSelectedSubscriptionId();
+            return GetSettingById(id);
+        }
+
+        public virtual PublishSettings GetSettingById(string id)
         {
             var setting = GetAllSettings().FirstOrDefault(s => s.Id == id);
             return setting;
         }
 
-        public object GetSettingByFile(string filename)
+        public virtual void SetSelectedSettingsId(string id)
+        {
+            _userSettings.SetSelectedSubscriptionId(id);
+        }
+
+        public virtual IEnumerable<PublishSettings> GetSettingByFile(string filename)
         {
             return GetAllSettings().Where(s => s.Filename == filename);
         }
 
         private readonly IFileSystem _fileSystem;
-
         private readonly PublishSettingsCache _cache;
+        private readonly IUserSettings _userSettings;
     }
 }

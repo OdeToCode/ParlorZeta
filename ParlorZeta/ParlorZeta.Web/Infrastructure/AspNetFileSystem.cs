@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Web;
-using ParlorZeta.Azure.FileSystem;
+using ParlorZeta.Azure.Contracts;
 
 namespace ParlorZeta.Web.Infrastructure
 {

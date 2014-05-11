@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
+using Microsoft.WindowsAzure;
 
 namespace ParlorZeta.Azure.Certificates
 {
@@ -18,5 +19,10 @@ namespace ParlorZeta.Azure.Certificates
         public string Name { get; set; }
         public X509Certificate2 Certificate { get; set; }
         public string Filename { get; set; }
+
+        public SubscriptionCloudCredentials CreateCredentials()
+        {
+            return new CertificateCloudCredentials(Id, Certificate);
+        }
     }
 }

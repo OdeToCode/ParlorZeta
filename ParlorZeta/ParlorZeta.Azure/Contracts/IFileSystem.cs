@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace ParlorZeta.Azure.FileSystem
+namespace ParlorZeta.Azure.Contracts
 {
     public interface IFileSystem
     {        
