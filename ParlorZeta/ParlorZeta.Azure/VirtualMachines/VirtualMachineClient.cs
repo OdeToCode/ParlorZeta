@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.Management.Scheduler;
+using Microsoft.WindowsAzure.Management.Compute;
 using ParlorZeta.Azure.Certificates;
 
 namespace ParlorZeta.Azure.VirtualMachines
@@ -13,15 +13,15 @@ namespace ParlorZeta.Azure.VirtualMachines
         {
             var settings = settingsStore.GetUserSelectedSettings();
             var credentials = settings.CreateCredentials();
-            _client = new CloudServiceManagementClient(credentials);
+            _client = new ComputeManagementClient(credentials);
         }
 
         public async Task<IEnumerable<VirtualMachineModel>> GetMachines()
         {
-            var response = await _client.CloudServices.ListAsync();
-            return response.CloudServices.Select(service => new VirtualMachineModel{ Name=service.Name });
+            var response = await _client.HostedServices.ListAsync();
+            return response.Select(service => new VirtualMachineModel{ Name=service.ServiceName });
         }
 
-        private readonly CloudServiceManagementClient _client;
+        private readonly ComputeManagementClient _client;
     }
 }
