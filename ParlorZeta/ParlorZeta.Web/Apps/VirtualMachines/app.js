@@ -5,17 +5,13 @@
         return $resource(webapi.machines.url, null, webapi.machines.defaultActions);
     });
 
-    app.controller("vmController", function($scope, machines) {
+    app.controller("vmController", function($scope, machines, errors) {
 
         var setMachines = function (data) {
             $scope.machines = data;
-        };
+        };                
 
-        var setError = function(reason) {
-            $scope.error = reason;
-        };
-
-        machines.query(setMachines);
+        machines.query(setMachines, errors.catchAll("Could not fetch machine list"));
     });
 
 }());
