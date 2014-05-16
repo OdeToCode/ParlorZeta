@@ -7,11 +7,7 @@
 
     app.controller("vmController", function($scope, machines, errors) {
 
-        var setMachines = function (data) {
-            $scope.machines = data;
-        };                
-
-        machines.query(setMachines, errors.catchAll("Could not fetch machine list"));
+        $scope.machines = machines.query(angular.noop, errors.catchAll("Could not fetch machine list"));
     });
 
 }());

@@ -37,7 +37,7 @@
     app.directive("errorList", function(errors) {
         return {
             restrict: "EA",
-            template: "<div ng-repeat='error in errors'>{{error}}</div>",
+            templateUrl: "/apps/common/errorList.html",
             link: function (scope) {
                 console.log("link");
                 scope.errors = errors.currentErrors;
@@ -47,17 +47,12 @@
 
     app.factory("webapi", function () {
 
-        var defaultActions = {
-               "get": { method: "GET" },
-               "save": { method: "POST" },
-               "update": { method: "PUT "},
-               "query": { method: "GET", isArray: true },
-               "remove": { method: "DELETE" },
-               "delete": { method: "DELETE" }
-           };
+        var actions = {
+            "update": { method: "PUT " }
+        };
 
         return {
-            machines: { url: "api/vms/:id", actions: defaultActions }
+            machines: { url: "api/vm/:id", actions: actions }
         };
     });
 

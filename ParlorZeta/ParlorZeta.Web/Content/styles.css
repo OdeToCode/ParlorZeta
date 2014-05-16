@@ -1,3 +1,9 @@
 ﻿body {
     background-color: #cccc99;
 }
+
+error-list {
+    position: absolute;
+    bottom: 0px;
+}
+
