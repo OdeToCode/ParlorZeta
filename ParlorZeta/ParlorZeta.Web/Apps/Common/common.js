@@ -38,8 +38,7 @@
         return {
             restrict: "EA",
             templateUrl: "/apps/common/errorList.html",
-            link: function (scope) {
-                console.log("link");
+            link: function (scope) {                
                 scope.errors = errors.currentErrors;
             }
         };
