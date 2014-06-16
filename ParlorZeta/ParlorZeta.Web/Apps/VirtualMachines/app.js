@@ -1,13 +1,12 @@
-﻿(function() {
-    var app = angular.module("virtualMachines", ["common", "ngAnimate", "ngResource"]);
+﻿(function () {
+    var app = angular.module("virtualMachines", ["common", "ngAnimate"]);
 
-    app.factory("machines", function($resource, webapi) {
-        return $resource(webapi.machines.url, null, webapi.machines.defaultActions);
-    });
+    app.controller("vmController", function ($scope, webapi) {
 
-    app.controller("vmController", function($scope, machines, errors) {
-
-        $scope.machines = machines.query(angular.noop, errors.catchAll("Could not fetch machine list"));
+        webapi.all("vm").getList()
+            .then(function (machines) {
+                $scope.machines = machines;
+            });
     });
 
 }());

@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var app = angular.module("common", []);
+    var app = angular.module("common", ["restangular"]);
 
     app.config(function($provide) {
         $provide.decorator("$log", function($delegate, errors) {
@@ -44,15 +44,10 @@
         };
     });
 
-    app.factory("webapi", function () {
-
-        var actions = {
-            "update": { method: "PUT " }
-        };
-
-        return {
-            machines: { url: "api/vm/:id", actions: actions }
-        };
+    app.factory("webapi", function (Restangular) {
+        return Restangular.withConfig(function(config) {
+            config.setBaseUrl("/api");
+        });
     });
 
 }());
