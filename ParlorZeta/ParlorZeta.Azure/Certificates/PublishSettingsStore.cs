@@ -71,7 +71,7 @@ namespace ParlorZeta.Azure.Certificates
         {
             get
             {
-                return "AppData/PublishSettings";        
+                return "App_Data/PublishSettings";        
             }
         }
 
