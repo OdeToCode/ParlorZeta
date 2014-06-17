@@ -1,12 +1,15 @@
 ﻿(function () {
     var app = angular.module("virtualMachines", ["common", "ngAnimate"]);
 
-    app.controller("vmController", function ($scope, webapi) {
+    app.controller("vmController", function ($scope, webapi, errors) {
+
+        var onMachines = function(machines) {
+
+        };
 
         webapi.all("vm").getList()
-            .then(function (machines) {
-                $scope.machines = machines;
-            });
+            .then(onMachines)
+            .catch(errors.catchAll("Could not retrieve virtual machines"));
     });
 
 }());

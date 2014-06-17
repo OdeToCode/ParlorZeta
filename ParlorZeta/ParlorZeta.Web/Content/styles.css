@@ -2,8 +2,14 @@
     background-color: #cccc99;
 }
 
+.alert-danger {
+    background-color: #ff0000;
+    border-color: #ebccd1;
+    color: #ffffff;
+}
+
 error-list {
     position: absolute;
     bottom: 0px;
+    width: 95%;
 }
-

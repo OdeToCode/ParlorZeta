@@ -22,6 +22,11 @@ namespace ParlorZeta.Azure.Certificates
 
         public SubscriptionCloudCredentials CreateCredentials()
         {
+
+            if (Certificate == null)
+            {
+                throw new InvalidOperationException("There is no certificate available for creating credentials");
+            }
             return new CertificateCloudCredentials(Id, Certificate);
         }
     }
