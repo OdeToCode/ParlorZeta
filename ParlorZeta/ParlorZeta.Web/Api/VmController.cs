@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using ParlorZeta.Azure.VirtualMachines;
 
@@ -14,8 +15,15 @@ namespace ParlorZeta.Web.Api
         }
 
         public async Task<IHttpActionResult> Get()
-        {            
-            return Ok(await _client.GetMachines());
+        {
+            try
+            {
+                return Ok(await _client.GetMachines());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }

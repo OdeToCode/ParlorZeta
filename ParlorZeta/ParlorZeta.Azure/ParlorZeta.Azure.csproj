@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Certificates\InvalidPublishSettings.cs" />
     <Compile Include="Certificates\PublishSettings.cs" />
     <Compile Include="Certificates\PublishSettingsCache.cs" />
     <Compile Include="Certificates\PublishSettingsStore.cs" />

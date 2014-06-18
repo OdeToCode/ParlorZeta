@@ -51,17 +51,8 @@ namespace ParlorZeta.Azure.Certificates
             var settings = _cache.GetFromCache();
             if (settings == null)
             {
-                settings = new List<PublishSettings>();
                 var files = _fileSystem.GetFileNames(BaseDirectory);
-                foreach (var file in files)
-                {
-                    var document = XDocument.Load(file);
-                    var subscriptions = document.Descendants("Subscription");
-                    foreach (var subscription in subscriptions)
-                    {
-                        settings.Add(new PublishSettings(subscription, file));
-                    }
-                }
+                settings = (from file in files let document = XDocument.Load(file) select new PublishSettings(document, file)).ToList();
                 _cache.SetToCache(settings);
             }
             return settings;
