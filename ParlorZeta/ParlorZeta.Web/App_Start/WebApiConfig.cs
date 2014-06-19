@@ -1,4 +1,7 @@
-﻿    using System.Web.Http;
+﻿using System.Net.Http.Formatting;
+using System.Web.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using ParlorZeta.Web.App_Start;
 using ParlorZeta.Web.Infrastructure;
 
@@ -11,6 +14,8 @@ namespace ParlorZeta.Web
             config.DependencyResolver = new StructureMapDependencyResolver(IoC.Container());
             
             config.MapHttpAttributeRoutes();
+
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

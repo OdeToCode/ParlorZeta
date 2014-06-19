@@ -4,7 +4,7 @@
     
     <error-list></error-list>
 
-    <table class="table table-hover table-striped">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Name</th>
@@ -14,7 +14,8 @@
         </thead>
         <tbody>
             <tr ng-repeat="machine in machines">
-                <td>{{machine.Name}}</td>
+                <td>{{machine.name}}</td>
+                <td>{{machine.status}}</td>
             </tr>
         </tbody>
     </table>    
